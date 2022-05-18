@@ -21,13 +21,30 @@ Tp final de la materia: "Visualización de la información". El tema es resolver
 
 ## Tema: Economía
 
-Nos toca el "Challenge 3"
+Nos toca el "Challenge 3": **Economic considers the financial health of the city.** 
 
-	Challenge 3: Economic considers the financial health of the city. Over time, are businesses growing or shrinking? How are people changing jobs? Are standards of living improving or declining over time?
-	Consider the financial status of Engagement’s businesses and residents, and use visual analytic techniques to address these questions.
-	Over the period covered by the dataset, which businesses appear to be more prosperous? Which appear to be struggling? Describe your rationale for your answers. Limit your response to 10 images and 500 words.
-	How does the financial health of the residents change over the period covered by the dataset? How do wages compare to the overall cost of living in Engagement? Are there groups that appear to exhibit similar patterns? Describe your rationale for your answers. Limit your response to 10 images and 500 words.
-	Describe the health of the various employers within the city limits. What employment patterns do you observe? Do you notice any areas of particularly high or low turnover? Limit your response to 10 images and 500 words.
+* Over time, 
+	* are businesses growing or shrinking?
+	* How are people changing jobs?
+	* Are standards of living improving or declining over time?
+	* Consider the financial status of Engagement’s businesses and residents, and use visual analytic techniques to address these questions.
+
+* Over the period covered by the dataset, 
+	* which businesses appear to be more prosperous?
+	* Which appear to be struggling?
+	* Describe your rationale for your answers. 
+
+* How does the financial health of the residents change over the period covered by the dataset?
+	* How do wages compare to the overall cost of living in Engagement?
+	* Are there groups that appear to exhibit similar patterns?
+	* Describe your rationale for your answers.
+
+* Describe the health of the various employers within the city limits. 
+	* What employment patterns do you observe?
+	* Do you notice any areas of particularly
+	* high or low turnover?
+
+* Limit your response to 10 images and 500 words.
 
 ## Otros links
 
