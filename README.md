@@ -9,6 +9,7 @@ Tp final de la materia: "Visualización de la información". El tema es resolver
 * Gentile, Matias
 * Suster, Mateo
 
+
 ## Profesores
 
 * Claudio Delrieux – cad@uns.edu.ar 
@@ -18,6 +19,7 @@ Tp final de la materia: "Visualización de la información". El tema es resolver
 	* EIDAES-UNSAM / CONICET
 * Paula Feldman - paulaadifeldman1@gmail.com
 	* CONICET
+
 
 ## Tema: Economía
 
@@ -45,6 +47,20 @@ Nos toca el "Challenge 3": **Economic considers the financial health of the city
 	* high or low turnover?
 
 * Limit your response to 10 images and 500 words.
+
+
+## Ideas
+
+
+### Preguntas // Clarificaciones
+
+* Datos cada 5 minutos, si duerme o si está despierto. Como es? 
+	* Debe ser medio falsie.
+* Mucha info para cruzar. A esto hay que levantarlo en una base de datos
+	* Docker
+	* Postgres // MySQL // SQL Server
+	* Levantar CSV
+
 
 ## Otros links
 
