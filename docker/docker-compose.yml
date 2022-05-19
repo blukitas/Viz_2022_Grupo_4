@@ -1,0 +1,20 @@
+version: '3.4'
+
+services:
+  postgres:
+    image: postgres
+    # postgres:
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+      - ./init-database.sh:/docker-entrypoint-initdb.d/init-database.sh
+    environment:
+      POSTGRES_USER: viz_user
+      POSTGRES_PASSWORD: viz_pass
+      POSTGRES_DB: viz
+    ports:
+      - 5432:5432
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "viz_user" ]
+      interval: 5s
+      retries: 5
+    restart: unless-stopped
