@@ -5,8 +5,10 @@ services:
     image: postgres
     # postgres:
     volumes:
-      - ./postgres-data:/var/lib/postgresql/data
+      # - ./postgres-data:/var/lib/postgresql/data
       - ./init-database.sh:/docker-entrypoint-initdb.d/init-database.sh
+      - ./SQL:/home/SQL
+      - ./challenge_data:/home/challenge_data
     environment:
       POSTGRES_USER: viz_user
       POSTGRES_PASSWORD: viz_pass
