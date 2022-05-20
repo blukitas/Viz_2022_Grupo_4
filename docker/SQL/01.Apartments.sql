@@ -5,6 +5,6 @@ CREATE TABLE apartments (
     , rentalCost float null
     , maxOccupancy integer null
     , numberOfRooms integer null
-    , "location" point null
+    , "location" varchar null
     , buildingId integer null
 )

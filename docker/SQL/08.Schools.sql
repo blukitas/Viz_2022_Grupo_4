@@ -4,6 +4,6 @@ CREATE TABLE schools (
       schoolId integer null
     , monthlyFees float null
     , maxEnrollment integer null
-    , "location" point null
+    , "location" varchar null
     , buildingId integer null
 )

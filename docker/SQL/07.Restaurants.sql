@@ -4,6 +4,6 @@ CREATE TABLE restaurants (
       restaurantId integer null
     , foodCost float null
     , maxOccupancy integer null
-    , "location" point null
+    , "location" varchar null
     , buildingId integer null
 )

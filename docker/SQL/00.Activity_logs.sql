@@ -1,8 +1,8 @@
-DROP TABLE IF EXISTS activity_logs;
+DROP TABLE IF EXISTS activityLogs;
 
-CREATE TABLE activity_logs (
-      "timestamp" timestamp null
-    , currentLocation point null
+CREATE TABLE activityLogs (
+      "timestamp"   varchar null
+    , currentLocation varchar null
     , participantId integer null
     , hungerStatus varchar null
     , sleepStatus varchar null
