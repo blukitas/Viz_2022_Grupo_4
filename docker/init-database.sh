@@ -28,10 +28,10 @@ for filename in *.csv; do
 done
 
 
-cd /home/challenge_data/ActivityLogs
+cd /home/challenge_data/Activity Logs
 for filename in *.csv; do
     OUTPUT=$(echo $filename | cut -d "." -f 1)
-    INSTRUCCION=$(echo "COPY activityLogs FROM '/home/challenge_data/ActivityLogs/$filename' csv header;")
+    INSTRUCCION=$(echo "COPY activityLogs FROM '/home/challenge_data/Activity Logs/$filename' csv header;")
     echo $INSTRUCCION
     psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" -c "$INSTRUCCION"
 done

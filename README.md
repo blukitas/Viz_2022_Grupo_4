@@ -29,7 +29,7 @@ Nos toca el "Challenge 3": **Economic considers the financial health of the city
 	* are businesses growing or shrinking?
 	* How are people changing jobs?
 	* Are standards of living improving or declining over time?
-	* Consider the financial status of Engagement’s businesses and residents, and use visual analytic techniques to address these questions.
+	* Consider the financial status of Engagement's businesses and residents, and use visual analytic techniques to address these questions.
 
 * Over the period covered by the dataset, 
 	* which businesses appear to be more prosperous?
