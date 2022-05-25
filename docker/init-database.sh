@@ -33,5 +33,13 @@ for filename in *.csv; do
     OUTPUT=$(echo $filename | cut -d "." -f 1)
     INSTRUCCION=$(echo "COPY activityLogs FROM '/home/challenge_data/Activity Logs/$filename' csv header;")
     echo $INSTRUCCION
-    psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" -c "$INSTRUCCION"
+    { # try
+
+        psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" -c "$INSTRUCCION"
+        #save your output
+
+    } || { # catch
+        # save log for exception 
+        echo "Error en archivo"
+    }
 done
