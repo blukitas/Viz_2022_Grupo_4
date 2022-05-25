@@ -5,13 +5,12 @@ Necesario
 * Docker
 * Docker compose
 * Los datos tienen que estar en la carpeta "challenge_data" con la siguiente estructura de carpetas:
-  * ActivityLogs (Sin espacio en el nombre)
+  * ActivityLogs 
   * Attributes
   * Journals
 
 Instrucciones, con docker andando
 
-* docker compose build
 * docker compose up
 
 Para testear, la recomendacion es usar dbeaver. Conexión
