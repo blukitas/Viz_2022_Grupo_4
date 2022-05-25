@@ -28,7 +28,7 @@ for filename in *.csv; do
 done
 
 
-cd /home/challenge_data/Activity Logs
+cd "/home/challenge_data/Activity Logs"
 for filename in *.csv; do
     OUTPUT=$(echo $filename | cut -d "." -f 1)
     INSTRUCCION=$(echo "COPY activityLogs FROM '/home/challenge_data/Activity Logs/$filename' csv header;")
