@@ -8,9 +8,9 @@ CREATE TABLE activityLogs (
     , hungerStatus varchar null
     , sleepStatus varchar null
     , apartmentId varchar null
-    , availableBalance float null
-    , jobId integer null
+    , availableBalance varchar null
+    , jobId varchar null
     , financialStatus varchar null
-    , dailyFoodBudget float null
-    , weeklyExtraBudget float null
+    , dailyFoodBudget varchar null
+    , weeklyExtraBudget varchar null
 )
