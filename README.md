@@ -51,16 +51,31 @@ Nos toca el "Challenge 3": **Economic considers the financial health of the city
 
 ## Ideas
 
+Por donde podemos responder?
+
+- En activity log hay:
+  - Jobid -> en que trabajo anda
+  - Balance -> Saldo de plata que tiene
+  - financial status -> Posibles valores 
+    - Unknown
+	- NA
+	- Stable
+	- Unstable
+  - currentMode -> Cuanto tiempo estan en el trabajo?
+  - hungerStatus -> Tiempo promedio con hambre?
+  - dailyFoodBudget -> Puede haber alguna correlacion entre el presupuesto diario y la situacion financiera?
+  - weeklyExtraBudget -> Puede haber alguna correlacion entre el presupuesto diario y la situacion financiera?
+
+- Participants -> Hay info demografica
+  - No pareciera variar en el tiempo
 
 ### Preguntas // Clarificaciones
 
 * Datos cada 5 minutos, si duerme o si está despierto. Como es? 
 	* Debe ser medio falsie.
-* Mucha info para cruzar. A esto hay que levantarlo en una base de datos
-	* Docker
-	* Postgres // MySQL // SQL Server
-	* Levantar CSV
 
+* Pubs y restaurantes. Tienen id medio arbitrarios, pocos y no arranca en 0. Se podra joinear con otras tablas? Digamos, un restaurante podria tener el mismo id que el employee? 
+  * Si no fuera asi, no pareciera que se puede joinear con nada.
 
 ## Otros links
 
