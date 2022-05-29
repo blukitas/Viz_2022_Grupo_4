@@ -17,24 +17,24 @@ select to_char(cast("timestamp" as "timestamp"), 'YYYY-MM') as ts
 
 drop table if exists vo_monthly_wage;
 
-create temporary table vo_monthly_wage as
 select 
 	to_char(cast(timestamp as date),'yyyy-MM') as month, 
 	participantid,
-	sum(case when category = 'Wage' then amount else 0 end) as wage_amt,
-	sum(case when category = 'Food' then amount else 0 end) as food_amt,
-	sum(case when category = 'Education' then amount else 0 end) as education_amt,
-	sum(case when category = 'Shelter' then amount else 0 end) as shelter_amt 
+	ROUND(sum(case when category = 'Wage' then amount else 0 end)::numeric, 2) as wage_amt,
+	ROUND(sum(case when category = 'Food' then amount else 0 end)::numeric, 2) as food_amt,
+	ROUND(sum(case when category = 'Education' then amount else 0 end)::numeric, 2) as education_amt,
+	ROUND(sum(case when category = 'Shelter' then amount else 0 end)::numeric, 2) as shelter_amt 
+  into vo_monthly_wage
 from financialjournal a 
 group by 1,2;
 
 
 select 
 	month, 
-	avg(wage_amt) as avg_wage_amt, 
-	avg(food_amt) as avg_food_amt, 
-	avg(education_amt) as avg_education_amt, 
-	avg(shelter_amt) as avg_shelter_amt
+	ROUND(avg(wage_amt)::numeric, 2) as avg_wage_amt, 
+	ROUND(avg(food_amt)::numeric, 2) as avg_food_amt, 
+	ROUND(avg(education_amt)::numeric, 2) as avg_education_amt, 
+	ROUND(avg(shelter_amt)::numeric, 2) as avg_shelter_amt
 from vo_monthly_wage
 group by 1;
 
@@ -42,7 +42,7 @@ group by 1;
 --Are there groups that appear to exhibit similar patterns?
 
 drop table if exists vo_monthly_wage_cohorts;
-create temporary table vo_monthly_wage_cohorts as
+
 select 
 	to_char(cast(timestamp as date),'yyyy-MM') as month, 
 	f.participantid,
@@ -50,10 +50,11 @@ select
 	p.age,
 	p.educationlevel,
 	p.interestgroup,
-	sum(case when category = 'Wage' then amount else 0 end) as wage_amt,
-	sum(case when category = 'Food' then amount else 0 end) as food_amt,
-	sum(case when category = 'Education' then amount else 0 end) as education_amt,
-	sum(case when category = 'Shelter' then amount else 0 end) as shelter_amt 
+	ROUND(sum(case when category = 'Wage' then amount else 0 end)::numeric, 2) as wage_amt,
+	ROUND(sum(case when category = 'Food' then amount else 0 end)::numeric, 2) as food_amt,
+	ROUND(sum(case when category = 'Education' then amount else 0 end)::numeric, 2) as education_amt,
+	ROUND(sum(case when category = 'Shelter' then amount else 0 end)::numeric, 2) as shelter_amt 
+  into vo_monthly_wage_cohorts
 from 
 	financialjournal f 
 	left join participants p on f.participantid =p.participantid  
@@ -61,12 +62,12 @@ group by 1,2,3,4,5,6;
 
 select 
 	month, 
-	educationlevel, -- Podemos cambiar el nivel de agrupamiento
-	avg(wage_amt) as avg_wage_amt, 
-	avg(food_amt) as avg_food_amt, 
-	avg(education_amt) as avg_education_amt, 
-	avg(shelter_amt) as avg_shelter_amt
+    educationlevel, -- Podemos cambiar el nivel de agrupamiento
+	ROUND(avg(wage_amt)::numeric, 2) as avg_wage_amt, 
+	ROUND(avg(food_amt)::numeric, 2) as avg_food_amt, 
+	ROUND(avg(education_amt)::numeric, 2) as avg_education_amt, 
+	ROUND(avg(shelter_amt)::numeric, 2) as avg_shelter_amt
 from 
 	vo_monthly_wage
-group by 1,2
-order by 1,3
+group by 1
+order by 1,4
