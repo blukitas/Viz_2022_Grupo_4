@@ -28,6 +28,7 @@ select
 from financialjournal a 
 group by 1,2;
 
+
 select 
 	month, 
 	avg(wage_amt) as avg_wage_amt, 
