@@ -5,7 +5,7 @@
        , j.employerid
        , count(distinct(participantid))
 	from activitylogs a
-  	  inner join jobs j on a.jobid = cast(j.jobid as varchar)
+  	  inner join jobs j on j.jobid = cast(a.jobid as varchar)
 	where to_char(cast("timestamp" as "timestamp"), 'MM') = '03'
       and j.employerid  = '868'
 	group by to_char(cast("timestamp" as "timestamp"), 'YYYY-MM-DD') 
