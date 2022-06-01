@@ -69,6 +69,16 @@ Por donde podemos responder?
 - Participants -> Hay info demografica
   - No pareciera variar en el tiempo
 
+- Financial log
+  - Transaciones por categoria. No estan muy balanceadas, pero muestran transaccionalidad. 
+  - No tiene como conectarla con otras cosas.
+
+- Travel journal, podria servir
+  - Location (Start and end)
+  - Balance (Start and end)
+  - Como se mueven y gastan. Toca ver si hay algo util.
+  - Podremos cruzarlo con la info de la ubicacion de los locales. O sera muy desconectado uno de otro?
+
 ### Preguntas // Clarificaciones
 
 * Datos cada 5 minutos, si duerme o si está despierto. Como es? 
