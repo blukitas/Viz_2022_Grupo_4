@@ -28,10 +28,30 @@ for filename in *.csv; do
 done
 
 
-cd "/home/challenge_data/Activity Logs"
+cd "/home/challenge_data/fix_activity_logs"
+# INSTRUCCION=$(echo "COPY activityLogs FROM '/home/challenge_data/Activity Logs/ParticipantStatusLogs1.csv' csv header;")
+# psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" -c "$INSTRUCCION"
+# INSTRUCCION=$(echo "COPY activityLogs FROM '/home/challenge_data/Activity Logs/ParticipantStatusLogs2.csv' csv header;")
+# psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" -c "$INSTRUCCION"
+# INSTRUCCION=$(echo "COPY activityLogs FROM '/home/challenge_data/Activity Logs/ParticipantStatusLogs3.csv' csv header;")
+# psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" -c "$INSTRUCCION"
+# INSTRUCCION=$(echo "COPY activityLogs FROM '/home/challenge_data/Activity Logs/ParticipantStatusLogs4.csv' csv header;")
+# psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" -c "$INSTRUCCION"
+# INSTRUCCION=$(echo "COPY activityLogs FROM '/home/challenge_data/Activity Logs/ParticipantStatusLogs5.csv' csv header;")
+# psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" -c "$INSTRUCCION"
+# INSTRUCCION=$(echo "COPY activityLogs FROM '/home/challenge_data/Activity Logs/ParticipantStatusLogs6.csv' csv header;")
+# psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" -c "$INSTRUCCION"
+# INSTRUCCION=$(echo "COPY activityLogs FROM '/home/challenge_data/Activity Logs/ParticipantStatusLogs7.csv' csv header;")
+# psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" -c "$INSTRUCCION"
+# INSTRUCCION=$(echo "COPY activityLogs FROM '/home/challenge_data/Activity Logs/ParticipantStatusLogs8.csv' csv header;")
+# psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" -c "$INSTRUCCION"
+# INSTRUCCION=$(echo "COPY activityLogs FROM '/home/challenge_data/Activity Logs/ParticipantStatusLogs9.csv' csv header;")
+# psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" -c "$INSTRUCCION"
+
+
 for filename in *.csv; do
     OUTPUT=$(echo $filename | cut -d "." -f 1)
-    INSTRUCCION=$(echo "COPY activityLogs FROM '/home/challenge_data/Activity Logs/$filename' csv header;")
+    INSTRUCCION=$(echo "COPY activityLogs FROM '/home/challenge_data/fix_activity_logs/$filename' csv header;")
     echo $INSTRUCCION
     { # try
 
@@ -42,4 +62,9 @@ for filename in *.csv; do
         # save log for exception 
         echo "Error en archivo"
     }
+done
+
+
+for filename in /home/SQL_post/*.sql; do
+    psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" -f $filename
 done
