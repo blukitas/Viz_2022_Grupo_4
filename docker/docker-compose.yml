@@ -9,6 +9,8 @@ services:
       - ./init-database.sh:/docker-entrypoint-initdb.d/init-database.sh
       - ./SQL:/home/SQL
       - ./challenge_data:/home/challenge_data
+    networks:
+        - default_net
     environment:
       POSTGRES_USER: viz_user
       POSTGRES_PASSWORD: viz_pass
@@ -20,3 +22,20 @@ services:
       interval: 5s
       retries: 5
     restart: unless-stopped
+
+  # jupyter-tensorflow:
+  #       build:
+  #         context: ./Jupyterlab
+  #         dockerfile: Dockerfile
+  #       networks:
+  #           - default_net
+  #       environment:
+  #           - PASSWORD=password
+  #           - JUPYTER_TOKEN=password
+  #       ports:
+  #         - "38888:8888"
+  #       volumes:
+  #         - ./work:/home/jovyan/work/notebooks/
+
+networks:
+    default_net:
