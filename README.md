@@ -12,9 +12,9 @@ Tp final de la materia: "Visualización de la información". El tema es resolver
 
 ## Profesores
 
-* Claudio Delrieux – cad@uns.edu.ar 
-	* Laboratorio de Ciencias de las Imágenes – www.imaglabs.org
-	* Universidad Nacional del Sur – www.uns.edu.ar
+* Claudio Delrieux - cad@uns.edu.ar 
+	* Laboratorio de Ciencias de las Imágenes - www.imaglabs.org
+	* Universidad Nacional del Sur - www.uns.edu.ar
 * Germán Rosati - german.rosati@gmail.com
 	* EIDAES-UNSAM / CONICET
 * Paula Feldman - paulaadifeldman1@gmail.com
@@ -78,6 +78,14 @@ Por donde podemos responder?
   - Balance (Start and end)
   - Como se mueven y gastan. Toca ver si hay algo util.
   - Podremos cruzarlo con la info de la ubicacion de los locales. O sera muy desconectado uno de otro?
+
+- Financial journey
+  - 'wage' -> Salario. Valor positivo
+  - 'food' -> Gasto en comida. Valor negativo
+  - 'shelter' -> Gasto en 'refugio'/abrigo/Casa?. Valor negativo
+  - 'Education' -> Gasto en educacion
+  - Lo que sobra -> Calculo de wage - suma de los otros
+    - Nadie tiene un 'wage' por mes. ALgunos tiene mas de 1 por día.
 
 ### Preguntas // Clarificaciones
 
