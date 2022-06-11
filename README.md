@@ -53,25 +53,32 @@ Nos toca el "Challenge 3": **Economic considers the financial health of the city
 
 Por donde podemos responder?
 
-- En activity log hay:
-  - Jobid -> en que trabajo anda
-  - Balance -> Saldo de plata que tiene
-  - financial status -> Posibles valores 
-    - Unknown
-	- NA
-	- Stable
-	- Unstable
-  - currentMode -> Cuanto tiempo estan en el trabajo?
-  - hungerStatus -> Tiempo promedio con hambre?
-  - dailyFoodBudget -> Puede haber alguna correlacion entre el presupuesto diario y la situacion financiera?
-  - weeklyExtraBudget -> Puede haber alguna correlacion entre el presupuesto diario y la situacion financiera?
+- **activitylog**:
+  - Tabla más rica. Info cada 5 minutos. Diferente status de la persona.
+  - Campos "relevantes"
+    - Jobid -> en que trabajo anda (trabajo pertenece a empleador)
+    - Balance -> Saldo de plata que tiene
+    - financial status -> Posibles valores 
+        - Unknown
+    	- NA
+    	- Stable
+    	- Unstable
+    - currentMode -> Cuanto tiempo están en el trabajo?
+    - hungerStatus -> Tiempo promedio con hambre?
+    - dailyFoodBudget -> Puede haber alguna correlacion entre el presupuesto diario y la situacion financiera?
+    - weeklyExtraBudget -> Puede haber alguna correlacion entre el presupuesto diario y la situacion financiera?
+  - Join con demográficos
+    - _Participants_ -> Hay info demografica
+    - No pareciera variar en el tiempo
+  - 
 
-- Participants -> Hay info demografica
-  - No pareciera variar en el tiempo
-
-- Financial log
-  - Transaciones por categoria. No estan muy balanceadas, pero muestran transaccionalidad. 
-  - No tiene como conectarla con otras cosas.
+- jobs + employeers
+  - Un employeer tiene puestos de trabajos
+  - A veces estan ocupados y a veces libres
+  - Posible gráfico:
+    - Evolucion de trabajos vacantes y resueltos
+    - Evolucion de cantidad de empleados por job_id
+    - Evolucion de empleados por empleador
 
 - Travel journal, podria servir
   - Location (Start and end)
@@ -79,13 +86,27 @@ Por donde podemos responder?
   - Como se mueven y gastan. Toca ver si hay algo util.
   - Podremos cruzarlo con la info de la ubicacion de los locales. O sera muy desconectado uno de otro?
 
-- Financial journey
-  - 'wage' -> Salario. Valor positivo
-  - 'food' -> Gasto en comida. Valor negativo
-  - 'shelter' -> Gasto en 'refugio'/abrigo/Casa?. Valor negativo
-  - 'Education' -> Gasto en educacion
-  - Lo que sobra -> Calculo de wage - suma de los otros
-    - Nadie tiene un 'wage' por mes. ALgunos tiene mas de 1 por día.
+
+- **financialjournal**
+  - Transaciones por categoria. No estan muy balanceadas, pero muestran transaccionalidad. 
+    - No veo forma de conectarla con otras tablas
+  - Categorias
+    - 'wage' -> Salario. Valor positivo
+    - 'food' -> Gasto en comida. Valor negativo
+    - 'shelter' -> Gasto en 'refugio'/abrigo/Casa?. Valor negativo
+    - 'Education' -> Gasto en educacion
+  - Tablas agregadas: 
+    - En vo_monthly_wage y en vo_daily_wage
+    - Gasto por persona por (mes/dia). Por categoria, suma de ingresos, suma de egresos, balance
+  - Chances de visualizar:
+    - Lineas - Gasto promedio
+    - Lineas - Gasto promedio + gastos individuales en distinto tono
+    - Scatter individual, fecha-gasto
+    - Scatter individual ingreso/egreso
+  - Algun gasto es de mayor 'calidad' ¿?
+    - Educacion podria ser mayor calidad de vida
+    - Shelter y food gasto mas básicos
+    - Aumento de ingreso, suele traducirse en mejor calidad de vida
 
 ### Preguntas // Clarificaciones
 
