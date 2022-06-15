@@ -8,6 +8,7 @@ services:
       - ./postgres-data:/var/lib/postgresql/data
       - ./init-database.sh:/docker-entrypoint-initdb.d/init-database.sh
       - ./SQL:/home/SQL
+      - ./SQL_post:/home/SQL_post
       - ./challenge_data:/home/challenge_data
     networks:
         - default_net
