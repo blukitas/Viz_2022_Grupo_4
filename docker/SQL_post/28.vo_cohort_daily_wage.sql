@@ -1,8 +1,8 @@
-drop table if exists vo_monthly_wage_cohorts;
+drop table if exists vo_daily_wage_cohorts;
 
-with monthly_spend as (
+with daily_spend as (
 	select 
-		to_char(cast("timestamp" as date),'yyyy-MM') as month, 
+		to_char(cast("timestamp" as date),'yyyy-MM-DD') as month, 
 		participantid,
 		sum(case when category = 'Wage' then amount else 0 end) as wage_amt,
 		sum(case when category = 'Food' then amount else 0 end) as food_amt,
@@ -13,7 +13,7 @@ with monthly_spend as (
 		avg(case when category = 'Education' then amount else 0 end) as education_avg,
 		avg(case when category = 'Shelter' then amount else 0 end) as shelter_avg 
 	from financialjournal a
-	group by to_char(cast(a."timestamp" as date),'yyyy-MM'), 
+	group by to_char(cast(a."timestamp" as date),'yyyy-MM-DD'), 
 			 participantid
 )
 select 
@@ -39,6 +39,6 @@ select
 	ROUND(wage_avg::numeric, 2) as earning_avg,
 	ROUND((food_avg + education_avg + shelter_avg)::numeric, 2) as spend_avg,
 	ROUND((wage_avg - food_avg + education_avg + shelter_avg)::numeric, 2) as balance_avg
-  into vo_monthly_wage_cohorts
-from monthly_spend ms
+  into vo_daily_wage_cohorts
+from daily_spend ms
 	left join participants p on ms.participantid = p.participantid  ;
