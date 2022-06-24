@@ -3,18 +3,15 @@ drop table if exists vo_daily_wage;
 with daily_spend as (
 	select 
 		to_char(cast("timestamp" as date),'yyyy-MM-DD') as month, 
-		participantid,
 		sum(case when category = 'Wage' then amount else 0 end) as wage_amt,
 		sum(case when category = 'Food' then amount else 0 end) as food_amt,
 		sum(case when category = 'Education' then amount else 0 end) as education_amt,
 		sum(case when category = 'Shelter' then amount else 0 end) as shelter_amt 
 	from financialjournal a
-	group by to_char(cast(a."timestamp" as date),'yyyy-MM-DD'), 
-			 participantid
+	group by to_char(cast(a."timestamp" as date),'yyyy-MM-DD')
 )
 select 
 	ms.month, 
-	ms.participantid,
 	ROUND(wage_amt::numeric, 2) as wage_amt,
 	ROUND(food_amt::numeric, 2) as food_amt,
 	ROUND(education_amt::numeric, 2) as education_amt,

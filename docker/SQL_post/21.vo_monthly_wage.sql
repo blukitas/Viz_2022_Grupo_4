@@ -14,12 +14,10 @@ with monthly_spend as (
 		avg(case when category = 'Education' then amount else 0 end) as education_avg,
 		avg(case when category = 'Shelter' then amount else 0 end) as shelter_avg 
 	from financialjournal a
-	group by to_char(cast(a."timestamp" as date),'yyyy-MM'), 
-			 participantid
+	group by to_char(cast(a."timestamp" as date),'yyyy-MM')
 )
 select 
 	ms.month, 
-	ms.participantid,
 	ROUND(wage_amt::numeric, 2) as wage_amt,
 	ROUND(food_amt::numeric, 2) as food_amt,
 	ROUND(education_amt::numeric, 2) as education_amt,
