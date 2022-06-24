@@ -59,9 +59,9 @@ Por donde podemos responder?
     - Balance -> Saldo de plata que tiene
     - financial status -> Posibles valores 
         - Unknown
-    	- NA
-    	- Stable
-    	- Unstable
+      	- NA
+      	- Stable
+      	- Unstable
     - currentMode -> Cuanto tiempo están en el trabajo?
     - hungerStatus -> Tiempo promedio con hambre?
     - dailyFoodBudget -> Puede haber alguna correlacion entre el presupuesto diario y la situacion financiera?
