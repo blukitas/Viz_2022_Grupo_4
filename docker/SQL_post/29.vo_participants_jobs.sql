@@ -1,37 +1,3 @@
--- Unique jobs for each participant
--- create schema if not exists participants;
-
--- How many unique jobs has each participant?
-with unique_participant_jobs as (
-	select a.participantid
-		 , a.jobid
-		 , count(1) as cant_lecturas
-	from activitylogs a 
-	group by a.participantid, a.jobid
-)
-select u.participantid
-     , count(distinct(u.jobid)) jobId
-from unique_participant_jobs u
-group by u.participantid
--- To filter more than 1
--- having count(distinct(u.jobid)) > 1
-;
-
--- Multiple jobs implies changes? or can be simoultaneous?
-select jobid
-     , min("timestamp")
-     , max("timestamp")
-     , min(weeklyextrabudget)
-     , max(weeklyextrabudget)  
-  from activitylogs a 
-  where participantid = 4
-  --and jobid = '1';
-  group by jobid;
-
-
--------------------------------------------------------
--- CREATE TABLE participans.jobs
--------------------------------------------------------
 
 drop table if exists vo_participants_jobs;
 
