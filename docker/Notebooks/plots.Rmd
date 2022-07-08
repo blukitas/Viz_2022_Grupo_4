@@ -1,0 +1,195 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+library(lubridate)
+library(zoo)
+
+setwd("/home/mateo1/repos/Viz_2022_Grupo_4/")
+path <-  "/home/mateo1/repos/Viz_2022_Grupo_4/"
+knitr::opts_knit$set(root.dir = "/home/mateo1/repos/Viz_2022_Grupo_4/")
+
+
+employ = read.csv("docker/Files/employers_log.csv", sep= ";", skip = 1)
+data = read.csv("docker/Files/employers_join.csv", sep= ",")
+
+pubs_spents = read.csv("docker/Files/pubs_spents.csv")
+resto_spents = read.csv("docker/Files/resto_spents.csv")
+revenue <- read.csv("/home/mateo1/repos/Viz_2022_Grupo_4/docker/Files/business_revenues.csv",
+                    sep= ";", skip = 1, dec = ",")%>% 
+  mutate( dt_time = as.Date(dt, tryFormats = c("%m/%d/%Y")),
+          total_revenue = as.double(revenue)) 
+
+```
+
+```{r}
+pubs_spents
+```
+
+
+```{r}
+data %>% 
+  mutate(dt_time = as.Date(dt_time),
+         mes = month(dt_time)  ) %>% 
+  filter( mes != 3  )  %>%
+  group_by(dt_time) %>% 
+  summarise(total_employees = sum(total_employees, na.rm = T) ) %>% 
+  ggplot(aes(dt_time, total_employees)) +
+  geom_line()+
+  labs(x = "", y = "Total employees")+
+  theme_minimal()+
+  ylim(0, 900)
+ggsave(paste0(path,"/img/14.aggregate_employ.png" ))
+
+```
+
+
+```{r}
+employ %>% 
+  mutate(dt_time = as.Date(dt), employerid= as_factor(employerid)) %>% 
+  group_by(dt_time, employerid) %>% 
+  summarise(total_employees = sum(total_employees, na.rm = T) ) %>% 
+  ggplot(aes(dt_time, total_employees, color = employerid)) +
+  geom_point()+
+  labs(x = "", y = "Total employees")+
+  theme_minimal()+
+  theme(legend.position = "none")
+```
+
+
+
+```{r}
+revenues  = read.csv("../output/13.05.a.revenue.business_id.dia.csv")
+x <-  revenues%>%
+  rename(pubId = venueid) %>% 
+  filter(venuetype == "Pub") %>% 
+# x <-  pubs_spents%>% 
+  mutate(
+    # dt_time = from_timestamp,
+    # dt_time = as.Date(from_timestamp, tryFormats = c("%m/%d/%Y")), #1/15/23
+    dt_time = lubridate::as_date(dt) ,# tryFormats = c("%Y-%m-%d")), #1/15/23
+         pubId =as_factor(pubId) 
+    # , employerid= as_factor(employerId)
+    ) %>% 
+   na.omit() %>% 
+  mutate(dt_time = as.yearmon(dt_time, "%Y-%m"),
+         mes = month(dt_time)  ) %>% 
+  filter( mes != 3  )  %>%
+   group_by(dt_time,  pubId) %>% #, employerid) %>% 
+  summarise(total_revenue = sum(revenue, na.rm = T) ) 
+
+x %>% 
+  ggplot(aes(dt_time, total_revenue, color = pubId)) +
+  geom_line()+
+  geom_point(size = 3)+
+  # facet_wrap(~pubId)+
+  labs(x = "", y = "Total revenue")+
+  theme_minimal()+
+  # theme(legend.position = "bottom")+
+  theme(legend.position = "none")#+
+  # scale_color_brewer(palette="Pastel2")
+ggsave(paste0(path, "/img/15.pubs_revenue.png"))
+```
+```{r}
+unique(x$dt_time)
+```
+
+
+```{r}
+y =revenues%>%
+  rename(restaurantId = venueid) %>%  
+  filter(venuetype == "Restaurant") %>% 
+# y = resto_spents %>% 
+  mutate(
+    # dt_time = from_timestamp,
+    dt_time = as.Date(dt), #1/15/23
+    # dt_time = as.Date(from_timestamp, tryFormats = c("%m/%d/%Y")), #1/15/23
+         restaurantId =as_factor(restaurantId) 
+    # , employerid= as_factor(employerId)
+    ) %>% 
+   na.omit() %>% 
+  mutate(dt_time = as.yearmon(dt_time, "%Y-%m"),
+         mes = month(dt_time)  ) %>% 
+  filter( mes != 3  )  %>% 
+   group_by(dt_time,  restaurantId) %>% #, employerid) %>% 
+  summarise(total_revenue = sum(revenue, na.rm = T) ) 
+
+y %>% 
+  ggplot(aes(dt_time, total_revenue, color = restaurantId)) +
+  geom_line()+
+  geom_point(size = 3)+
+  # facet_wrap(~pubId)+
+  labs(x = "", y = "Total revenue")+
+  theme_minimal()+
+  theme(legend.position = "none")#+ 
+  # scale_color_brewer(palette="Pastel1")
+ggsave(paste0(path, "/img/15.restos_revenue.png"))
+
+```
+```{r}
+y
+
+```
+
+```{r}
+
+
+z = revenue %>% 
+   # na.omit() %>% 
+  mutate(dt_time = as.yearmon(dt_time, "%m/%Y")) %>%
+   group_by(dt_time,  venuetype) %>% #, employerid) %>%
+  summarise(total_revenue = sum(total_revenue, na.rm = T) ) 
+
+
+z%>% 
+  ggplot(aes(dt_time, total_revenue, color = venuetype)) +
+  geom_line()+
+  geom_point(size = 1)+
+  # facet_wrap(~pubId)+
+  labs(x = "", y = "Total revenue")+
+  theme_minimal()+
+  theme(legend.position = "bottom")+ scale_color_brewer(palette="Set1")
+```
+```{r}
+revenue %>% 
+  filter(venuetype == "apartment")
+```
+```{r}
+y %>% 
+  ggplot(aes(dt_time, total_revenue, color = restaurantId)) +
+  geom_line()+
+  geom_point(size = 5)+
+  # facet_wrap(~pubId)+
+  labs(x = "", y = "Total revenue")+
+  theme_minimal()+
+  theme(legend.position = "bottom")+ scale_color_brewer(palette="Pastel1")
+ggsave(paste0(path, "/img/15.restos_revenue.png"))
+```
+
+
+```{r}
+hs_spent = read.csv("/home/mateo1/repos/Viz_2022_Grupo_4/docker/output/13.02.time_on_different_activities.csv") %>% 
+  mutate( ts = as.Date(ts,  tryFormats = c("%Y-%m-%d")) ,
+          mes = month(ts)  ) %>% 
+  filter( mes != 4  )
+hs_spent
+```
+```{r}
+library(viridis)
+
+hs_spent %>% 
+  ggplot(aes(ts, time_spend, fill= currentmode)) +
+  geom_bar(stat = "identity", position="fill") +
+  scale_y_continuous(labels = scales::percent)+
+  theme_minimal()+
+  theme(legend.position = "bottom")+
+  labs(y = "Time spend (%)", x = "")+
+  scale_fill_viridis(discrete = T) 
+ggsave(paste0(path, "/img/16.time_spent.png"))
+
+```
+
