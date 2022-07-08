@@ -19,7 +19,6 @@ data = read.csv("docker/Files/employers_join.csv", sep= ",")
 
 pubs_spents = read.csv("docker/Files/pubs_spents.csv")
 resto_spents = read.csv("docker/Files/resto_spents.csv")
-revenues  = read.csv("../output/13.05.a.revenue.business_id.dia.csv")
 revenue <- read.csv("/home/mateo1/repos/Viz_2022_Grupo_4/docker/Files/business_revenues.csv",
                     sep= ";", skip = 1, dec = ",")%>% 
   mutate( dt_time = as.Date(dt, tryFormats = c("%m/%d/%Y")),
@@ -64,8 +63,10 @@ employ %>%
 
 
 ```{r}
+revenues  = read.csv("../output/13.05.a.revenue.business_id.dia.csv")
 x <-  revenues%>%
   rename(pubId = venueid) %>% 
+  filter(venuetype == "Pub") %>% 
 # x <-  pubs_spents%>% 
   mutate(
     # dt_time = from_timestamp,
@@ -75,21 +76,23 @@ x <-  revenues%>%
     # , employerid= as_factor(employerId)
     ) %>% 
    na.omit() %>% 
-  mutate(dt_time = as.yearmon(dt_time, "%Y-%m")) %>% 
+  mutate(dt_time = as.yearmon(dt_time, "%Y-%m"),
+         mes = month(dt_time)  ) %>% 
+  filter( mes != 3  )  %>%
    group_by(dt_time,  pubId) %>% #, employerid) %>% 
   summarise(total_revenue = sum(revenue, na.rm = T) ) 
 
 x %>% 
   ggplot(aes(dt_time, total_revenue, color = pubId)) +
   geom_line()+
-  geom_point(size = 5)+
+  geom_point(size = 3)+
   # facet_wrap(~pubId)+
   labs(x = "", y = "Total revenue")+
   theme_minimal()+
   # theme(legend.position = "bottom")+
   theme(legend.position = "none")#+
   # scale_color_brewer(palette="Pastel2")
-# ggsave(paste0(path, "/img/15.pubs_revenue.png"))
+ggsave(paste0(path, "/img/15.pubs_revenue.png"))
 ```
 ```{r}
 unique(x$dt_time)
@@ -99,6 +102,7 @@ unique(x$dt_time)
 ```{r}
 y =revenues%>%
   rename(restaurantId = venueid) %>%  
+  filter(venuetype == "Restaurant") %>% 
 # y = resto_spents %>% 
   mutate(
     # dt_time = from_timestamp,
@@ -108,20 +112,22 @@ y =revenues%>%
     # , employerid= as_factor(employerId)
     ) %>% 
    na.omit() %>% 
-  mutate(dt_time = as.yearmon(dt_time, "%Y-%m")) %>% 
+  mutate(dt_time = as.yearmon(dt_time, "%Y-%m"),
+         mes = month(dt_time)  ) %>% 
+  filter( mes != 3  )  %>% 
    group_by(dt_time,  restaurantId) %>% #, employerid) %>% 
   summarise(total_revenue = sum(revenue, na.rm = T) ) 
 
 y %>% 
   ggplot(aes(dt_time, total_revenue, color = restaurantId)) +
   geom_line()+
-  geom_point(size = 5)+
+  geom_point(size = 3)+
   # facet_wrap(~pubId)+
   labs(x = "", y = "Total revenue")+
   theme_minimal()+
   theme(legend.position = "none")#+ 
   # scale_color_brewer(palette="Pastel1")
-# ggsave(paste0(path, "/img/15.restos_revenue.png"))
+ggsave(paste0(path, "/img/15.restos_revenue.png"))
 
 ```
 ```{r}
